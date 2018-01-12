@@ -36,7 +36,7 @@ public class Profile {
 	public void setProj(String value) {
 		proj.set(value);
 	}
-	public StringProperty idProperty() { return id;}
-	public StringProperty nameProperty() { return name;}
-	public StringProperty projProperty() { return proj;}
+//	public StringProperty idProperty() { return id;}
+//	public StringProperty nameProperty() { return name;}
+//	public StringProperty projProperty() { return proj;}
 }
