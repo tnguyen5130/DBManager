@@ -1,34 +1,61 @@
 package application;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class Controller {
+public class Controller implements Initializable {
+
 	@FXML
 	private Button myButton;
 	@FXML
-	private TextField myTextField;
+	private TableView<Profile> table;
+	@FXML
+	private TableColumn<Profile, String> columnStudentID;
+	@FXML
+	private TableColumn<Profile, String> columnName;
+	@FXML
+	private TableColumn<Profile, String> columnProject;
 
-	// When user click on myButton
-	// this method will be called.
-	public void showDateTime(ActionEvent event) {
-		System.out.println("Button Clicked!");
+	private DBConnection db;
+	private ObservableList<Profile> data;
 
-		Date now = new Date();
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		// TODO Auto-generated method stub
+		db = new DBConnection();
+	}
 
-		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
-
-		// Model
-		String dateTimeString = df.format(now);
-
-		// VIEW.
-		myTextField.setText(dateTimeString);
-
+	@FXML
+	public void checkConnection(ActionEvent event) {
+		columnStudentID.setCellValueFactory(new PropertyValueFactory<>("id"));
+		columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		columnProject.setCellValueFactory(new PropertyValueFactory<>("proj"));
+		try {
+			Connection connect = db.connectDB();
+			data = FXCollections.observableArrayList();
+			Statement statement = connect.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM ititiu16137.Profile");
+			while (rs.next()) {
+				data.add(new Profile(rs.getString(2), rs.getString(3), rs.getString(4)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	//	table.setItems(data);
 	}
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="635.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">	
+   <children>
+      <TableView layoutX="40.0" layoutY="45.0" prefHeight="375.0" prefWidth="497.0">
+        <columns>
+          <TableColumn fx:id="columnStudentID" prefWidth="125.0" text="StudentID" />
+          <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="211.0" text="Name" />
+            <TableColumn fx:id="columnProject" minWidth="0.0" prefWidth="160.0" text="Major" />
+        </columns>
+      </TableView>
+      <Button layoutX="32.0" layoutY="517.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="112.0" layoutY="517.0" mnemonicParsing="false" text="Next" />
+      <Button fx:id="myButton" layoutX="252.0" layoutY="454.0" mnemonicParsing="false" onAction="#checkConnection" prefHeight="22.0" prefWidth="79.0" text="Test" />
+   
+   </children>
+</AnchorPane>
