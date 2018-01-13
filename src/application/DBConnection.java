@@ -7,11 +7,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBConnection{
-
+	
 	public Connection connectDB() {
 		/// Driver
 		try {
-			String url = "jdbc:mysql://db.hcmiuiot.club/ititiu16137?autoReconnect=true&useSSL=false";
+			String url = "jdbc:mysql://db.hcmiuiot.club/ititiu16137";
 			String username = "ititiu16137";
 			String password = "Trung@1998";
 			
