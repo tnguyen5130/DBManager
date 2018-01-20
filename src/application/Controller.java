@@ -31,18 +31,18 @@ public class Controller implements Initializable {
 	@FXML
 	private Button myButton;
 	@FXML
-	private TableView<Profile> table  = new TableView<Profile>();
+	private TableView<Profile> table = new TableView<Profile>();
 	@FXML
-	private TableColumn<Profile, String> columnStudentID ;
+	private TableColumn<Profile, String> columnStudentID;
 	@FXML
-	private TableColumn<Profile, String> columnName ;
+	private TableColumn<Profile, String> columnName;
 	@FXML
-	private TableColumn<Profile, String> columnProject ;
+	private TableColumn<Profile, String> columnProject;
 
 	private DBConnection db;
 	private ResultSet result;
-	
-	//private ObservableList<Profile> data;
+
+	// private ObservableList<Profile> data;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -50,49 +50,43 @@ public class Controller implements Initializable {
 		db = new DBConnection();
 		loadDB();
 	}
-	
+
 	@FXML
 	public void checkConnection(ActionEvent event) {
-			columnStudentID.setCellValueFactory(new PropertyValueFactory<>("id"));
-			columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-			columnProject.setCellValueFactory(new PropertyValueFactory<>("proj"));
-			 table.setItems(listData());
-		}
-		
+		columnStudentID.setCellValueFactory(new PropertyValueFactory<>("id"));
+		columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+		columnProject.setCellValueFactory(new PropertyValueFactory<>("proj"));
+		table.setItems(listData());
+	}
 
-	
-	
-	 private ObservableList<Profile> listData(){
-	        ObservableList<Profile> list = FXCollections.observableArrayList();
-	        try {
-				for(int i = 0 ; i <= result.getMetaData().getColumnCount() ; i++) {
-					String id = result.getString("StudentID");
-					String name = result.getString("Name");
-					String major = result.getString("Major");
-				list.add(new Profile(id,name,major));
+	private ObservableList<Profile> listData() {
+		ObservableList<Profile> list = FXCollections.observableArrayList();
+		try {
+			for (int i = 0; i <= result.getMetaData().getColumnCount(); i++) {
+				String id = result.getString("StudentID");
+				String name = result.getString("Name");
+				String major = result.getString("Major");
+				list.add(new Profile(id, name, major));
 				result.next();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	        return list;
-	    }
+		return list;
+	}
 
 	public void loadDB() {
 		try {
 			Connection connect = db.connectDB();
 			result = connect.createStatement().executeQuery("SELECT * FROM `Profile`");
 			result.first();
-			}
-				
-			
-			
-		 catch (SQLException e) {
+		}
+
+		catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
 	}
 
-} 
-
+}
