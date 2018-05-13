@@ -14,9 +14,6 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene1.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
-//			FXMLLoader loader2 = new FXMLLoader(getClass().getResource("Scene2.fxml"));
-//			Parent root2 = loader2.load();
-//			Scene scene2 = new Scene(root2);
 			primaryStage.setTitle("MemberManager");
 			primaryStage.setScene(scene);
 			primaryStage.show();
